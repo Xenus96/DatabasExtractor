@@ -1,9 +1,9 @@
 # DatabasExtractor
 Messenger DatabasExtractor for Android devices
 
-![image](https://github.com/user-attachments/assets/891ab671-9f63-43a8-938b-e4aa3872d905)
+![An example of using DatabasExtractor](https://github.com/user-attachments/assets/891ab671-9f63-43a8-938b-e4aa3872d905)
 
-## Current features of the script:
+## Current DatabasExtractor features:
 - Allows to extract artifacts of the messengers Viber, WhatsApp, Signal and Telegram;
 - Extracted artifacts this script automatically copy to your local computer at C:\Users\<username>\Downloads\DatabasExtractor;
 - Extracted artifacts this script also saves in an internal /storage/emulated/0/Download/DatabasExtractor directory of your Mobile Device;
