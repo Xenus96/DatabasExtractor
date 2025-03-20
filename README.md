@@ -11,6 +11,7 @@ Messenger DatabasExtractor for Android devices
 
 ## Prerequisites:
 - Your Android device must be rooted to use the DatabasExtractor script;
-- You need to download an Android Debug Bridge (ADB) tool to your computer;
+- You need to download an Android Debug Bridge (ADB) tool on your computer;
+- You need to install Python on your computer;
 - You need to connect your Android device to your computer via USB cable and turn on USB Debugging on the phone;
-- You need to start the DatabasExtractor.py script from the local ADB directory (where the file abd.exe is located);
+- You need to start the DatabasExtractor.py script from the local ADB directory (where the file abd.exe is located).
