@@ -1,5 +1,6 @@
 # DatabasExtractor
 Messenger DatabasExtractor for Android devices
+Was tested primarly on Android 14.
 
 ![An example of using DatabasExtractor](https://github.com/user-attachments/assets/891ab671-9f63-43a8-938b-e4aa3872d905)
 
