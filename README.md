@@ -9,7 +9,7 @@ Messenger DatabasExtractor for Android devices
 - Extracted artifacts are also saved to an internal /storage/emulated/0/Download/DatabasExtractor directory of your Mobile Device;
 - Allows to delete the directory /storage/emulated/0/Download/DatabasExtractor to free the Mobile Device's space;
 - Automatically performs the AES GCM decryption of the SQLCipher key which is used to open the file "signal.db".
-![An example of using the AES GCM decryption functionality](https://github.com/user-attachments/assets/87e14337-1e0e-45f0-abe7-a81aab35a24c)
+![An example of using the AES GCM decryption functionality](https://github.com/user-attachments/assets/f3a2cb82-ae7f-4c2b-91df-ee9f23b29412)
 
 
 ## Prerequisites:
