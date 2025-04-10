@@ -9,13 +9,38 @@ import xml.etree.ElementTree as ET
 import json
 import re
 import sqlite3
+import shutil
 
+# Automatically find adb.exe if not in System PATH
+def find_adb():
+    # Try if adb is already in System PATH
+    if shutil.which("adb"):
+        return "adb"
+
+    # Drives to search (more drives can be added here if necessary)
+    drives = ['C:\\', 'D:\\']
+
+    print("\033[33mSearching for 'adb.exe' on your system...\033[0m")
+    for drive in drives:
+        for root, dirs, files in os.walk(drive):
+            if "adb.exe" in files:
+                adb_path = os.path.join(root, "adb.exe")
+                print(f"\033[32mFound adb.exe at:\033[0m {adb_path}")
+                return f'"{adb_path}"'
+    print("\033[31mCould not find adb.exe automatically. Please install ADB or add it to your PATH.\033[0m")
+    return None
+
+# Set ADB path globally
+ADB = find_adb()
+if not ADB:
+    exit(1)
 
 # A function to execute ADB commands
 def run_adb_command(command):
-    result = subprocess.run(command, shell=True, capture_output=True, text=True)
+    full_command = f"{ADB} {command}" if not command.strip().startswith("adb") else command.replace("adb", ADB, 1)
+    result = subprocess.run(full_command, shell=True, capture_output=True, text=True)
     if result.returncode != 0:
-        print(f"\033[31mError executing command:\033[0m {command}")
+        print(f"\033[31mError executing command:\033[0m {full_command}")
         print(result.stderr)
         return None
     return result.stdout
@@ -94,12 +119,12 @@ Plaintext Header Size: 0
             # Extract Signal secrets from the XML file
             data, iv = extract_secrets_from_xml(xml_content, "pref_database_encrypted_secret")
             print("Signal AES GCM parameters:")
-            print(f"Extracted data: {data}")
+            print(f"Extracted ciphertext: {data}")
             print(f"Extracted IV: {iv}")
 
             # Extracting the AES GCM Secret Key from the database "persistent.sqlite"
             persistent_database_file_path = os.path.expanduser("~\Downloads\DatabasExtractor\Signal\persistent.sqlite")
-            hex_key = extract_specific_blob_segment(persistent_database_file_path)                 # The correct value is: " 4d 96 ce 69 9c 1f 8d da 1b f7 55 4c 97 7d 3f 4f "
+            hex_key = extract_specific_blob_segment(persistent_database_file_path)
 
             # Try to decrypt the SQLCipher key with the given HEX key. If fails then asks the user to input another HEX key.
             try:
@@ -206,7 +231,7 @@ def extract_specific_blob_segment(database_path: str) -> str:
         print(f"Database error: {e}")
     except Exception as e:
         print(f"Error: {e}")
-    finally:
+    finally: # Closing the connection to the database "persistent.sqlite"
         if conn:
             conn.close()
 
@@ -240,8 +265,8 @@ def main():
         print("2 - Extract WhatsApp files")
         print("3 - Extract Signal files")
         print("4 - Extract Telegram files")
-        print("5 - \033[31mDelete all copied files\033[0m")
-        print("6 - Exit the program")
+        print("5 - \033[31mDelete all copied files on the Mobile Device\033[0m")
+        print("6 - Exit the DatabasExtractor")
 
         choice = input("Enter your choice (1-6): ")
 
