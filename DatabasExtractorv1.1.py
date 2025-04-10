@@ -8,6 +8,7 @@ import binascii
 import xml.etree.ElementTree as ET
 import json
 import re
+import sqlite3
 
 
 # A function to execute ADB commands
@@ -96,30 +97,17 @@ Plaintext Header Size: 0
             print(f"Extracted data: {data}")
             print(f"Extracted IV: {iv}")
 
-            # Prompt for and validate the hex key until decryption succeeds
-            while True:
-                hex_key_input = input(                  
-                    "Enter the HEX value of the Secret Key (16 bytes, e.g. 4d 96 ce ...): ").strip().lower()
+            # Extracting the AES GCM Secret Key from the database "persistent.sqlite"
+            persistent_database_file_path = os.path.expanduser("~\Downloads\DatabasExtractor\Signal\persistent.sqlite")
+            hex_key = extract_specific_blob_segment(persistent_database_file_path)                 # The correct value is: " 4d 96 ce 69 9c 1f 8d da 1b f7 55 4c 97 7d 3f 4f "
 
-                # Normalize: remove excess spaces, keep only valid hex bytes
-                hex_parts = re.findall(r'[0-9a-f]{2}', hex_key_input)
-
-                # Check the length of the hex key. It must be 16 bytes. If not, then the error is thrown
-                if len(hex_parts) != 16:
-                    print("\033[31mInvalid key length.\033[0m Please enter exactly 16 bytes (32 hex characters).")
-                    continue
-
-                hex_key = ' '.join(hex_parts)  # Normalize formatting
-
-                # Try to decrypt the SQLCipher key with the given HEX key. If fails then asks the user to input another HEX key.
-                try:
-                    decrypted = aes_gcm_decrypt(data, iv, hex_key)
-                    print("\033[32mDecryption successful!\033[0m")
-                    print(f"Decrypted key (hex/plaintext): {decrypted}")
-                    break  # Exit loop after successful decryption
-                except ValueError as e:
-                    print(f"\033[31mDecryption failed:\033[0m {e}")
-                    print("Please try again.\n")
+            # Try to decrypt the SQLCipher key with the given HEX key. If fails then asks the user to input another HEX key.
+            try:
+                decrypted = aes_gcm_decrypt(data, iv, hex_key)
+                print("\033[32mDecryption successful!\033[0m")
+                print(f"Decrypted key (hex/plaintext): {decrypted}")
+            except ValueError as e:
+                print(f"\033[31mDecryption failed:\033[0m {e}")
 
             # Saving the decrypted key
             sqlcipher_key_file_path = os.path.expanduser(
@@ -175,6 +163,53 @@ def aes_gcm_decrypt(ciphertext_b64: str, iv_b64: str, hex_key: str):
     except (InvalidTag, binascii.Error, ValueError) as e:
         raise ValueError(f"Decryption failed: {str(e)}")
 
+# A function to extract the AES GCM Secret Key of the Signal Messenger
+def extract_specific_blob_segment(database_path: str) -> str:
+    conn = None
+    try:
+        # Connect to the database
+        conn = sqlite3.connect(database_path)
+        cursor = conn.cursor()
+
+        print(f"Connected to the 'persistent.sqlite' database: {database_path}")
+
+        # Find in the database the ID of the row which has the string "SignalSecret" in it
+        cursor.execute("SELECT id FROM keyentry WHERE alias = 'SignalSecret'")
+        keyentry_row = cursor.fetchone()
+
+        if not keyentry_row:
+            raise ValueError("'SignalSecret' not found in keyentry table")
+
+        keyentry_id = keyentry_row[0]
+        print(f"Found SignalSecret with ID: {keyentry_id} in the 'keyentry' table")
+
+        # Searching for the Secret Key by using the found ID from the previous step
+        cursor.execute("SELECT blob FROM blobentry WHERE keyentryid = ?", (keyentry_id,))
+        blob_row = cursor.fetchone()
+
+        if not blob_row or not blob_row[0]:
+            raise ValueError(f"No blob found for ID {keyentry_id}")
+
+        blob_data = blob_row[0]  # Copied raw bytes of the blob
+
+        # Extract 16-byte segment (aka Secret Key) starting at byte 5 (index 5 to 21)
+        if len(blob_data) < 21:
+            raise ValueError("Blob is too short to extract the required segment.")
+
+        extracted_segment = blob_data[5:21].hex() # Extracted Secret Key in HEX
+
+        print(f"\nExtracted 16-byte segment of the Secret Key (HEX): {extracted_segment}")
+
+        return extracted_segment
+
+    except sqlite3.Error as e:
+        print(f"Database error: {e}")
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        if conn:
+            conn.close()
+
 
 # Main function
 def main():
@@ -210,7 +245,7 @@ def main():
 
         choice = input("Enter your choice (1-6): ")
 
-        # Define the files and directories to copy and folder name based on the user's choice
+        # Define the files to copy and folder name based on the user's choice
         if choice == "1":
             files_to_copy = [
                 "/data/data/com.viber.voip/"
