@@ -98,7 +98,7 @@ Plaintext Header Size: 0
 
             # Prompt for and validate the hex key until decryption succeeds
             while True:
-                hex_key_input = input(                  # The correct value is: " 4d 96 ce 69 9c 1f 8d da 1b f7 55 4c 97 7d 3f 4f "
+                hex_key_input = input(                  
                     "Enter the HEX value of the Secret Key (16 bytes, e.g. 4d 96 ce ...): ").strip().lower()
 
                 # Normalize: remove excess spaces, keep only valid hex bytes
@@ -140,7 +140,6 @@ def delete_database_extractor_folder(local_dir):
 
 # A function to extract Signal's crypto parameters from the .xml file
 def extract_secrets_from_xml(xml_content: str, preference_name: str):
-
     try:
         root = ET.fromstring(xml_content)
         for elem in root.findall("string"):
@@ -211,7 +210,7 @@ def main():
 
         choice = input("Enter your choice (1-6): ")
 
-        # Define the files to copy and folder name based on the user's choice
+        # Define the files and directories to copy and folder name based on the user's choice
         if choice == "1":
             files_to_copy = [
                 "/data/data/com.viber.voip/"
