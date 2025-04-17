@@ -19,8 +19,27 @@ Messenger DatabasExtractor for Android devices. Was tested primarly on Android 1
 - Automatically decrypts all user attachments (photo, video, documents) from the "../app_parts" directory of the Signal Messenger (for detailed examples check the **"How to use the "Signal Attachment Decryption" feature"** paragraph below)
 
 ## How to use the "Signal Attachment Decryption" feature
-#### Step 1:
+#### Step 1: Launch the DatabasExtractor tool and choose the specific option from the menu.
 
+<p align="center">
+  <img width="800" src="https://github.com/user-attachments/assets/014474e8-0208-4bdf-a9bb-8ac63d2db243">
+</p>
+
+**IMPORTANT NOTE:** Before decrypting attachments, you need to extract the Signal Messenger files from you Mobile Device with DatabasExtractor!
+
+#### Step 2: Open the decrypted "signal.db" database in DB Browser for SQLite and export the table "attachment.json" to a new folder.
+
+<p align="center">
+  <img width="800" src="https://github.com/user-attachments/assets/15da87f3-7fe0-4826-b202-2a9e45de9ec8">
+</p>
+
+#### Step 3: Send the path pointing to the folder (where the “attachment.json” file is located) to the DatabasExtractor tool.
+
+<p align="center">
+  <img width="800" src="https://github.com/user-attachments/assets/f67c5cbd-9d91-44f1-983f-118498b37bab">
+</p>
+
+All decrypted attachments will be saved at "C:/Users/%username%/Downloads/DatabasExtractor/Signal/org.thoguthcrime.securesms/app_parts/decrypted".
 
 ## Prerequisites:
 - Your Android device must be rooted to use the DatabasExtractor script;
