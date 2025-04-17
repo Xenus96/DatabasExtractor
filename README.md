@@ -1,8 +1,9 @@
 # DatabasExtractor
-Messenger DatabasExtractor for Android devices.\
-Was tested primarly on Android 14.
+Messenger DatabasExtractor for Android devices. Was tested primarly on Android 14.
 
-![An example of using DatabasExtractor](https://github.com/user-attachments/assets/891ab671-9f63-43a8-938b-e4aa3872d905)
+<p align="center">
+  <img width="800" src="https://github.com/user-attachments/assets/d21b617d-9dd5-43c1-bbe3-f22ea835300c">
+</p>
 
 ## Current DatabasExtractor features:
 - Allows to extract artifacts of the following messengers: Viber, WhatsApp, Signal and Telegram;
@@ -10,8 +11,15 @@ Was tested primarly on Android 14.
 - Extracted artifacts are also saved to an internal /storage/emulated/0/Download/DatabasExtractor directory of your Mobile Device;
 - Allows to delete the directory /storage/emulated/0/Download/DatabasExtractor to free the Mobile Device's space;
 - Automatically performs the AES GCM decryption of the SQLCipher key which is used to open the file "signal.db".
-![An example of using the AES GCM decryption functionality](https://github.com/user-attachments/assets/f3a2cb82-ae7f-4c2b-91df-ee9f23b29412)
-- Automatically decrypts all user attachments (photo, video, documents) from the "../app_parts" directory of the Signal Messenger (for detailed examples see "Signal Attachment Decryption instractions")
+
+<p align="center">
+  <img width="800" src="https://github.com/user-attachments/assets/f3a2cb82-ae7f-4c2b-91df-ee9f23b29412">
+</p>
+
+- Automatically decrypts all user attachments (photo, video, documents) from the "../app_parts" directory of the Signal Messenger (for detailed examples check the **"How to use the "Signal Attachment Decryption" feature"** paragraph below)
+
+## How to use the "Signal Attachment Decryption" feature
+#### Step 1:
 
 
 ## Prerequisites:
