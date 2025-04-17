@@ -39,7 +39,7 @@ Messenger DatabasExtractor for Android devices. Was tested primarly on Android 1
   <img width="800" src="https://github.com/user-attachments/assets/f67c5cbd-9d91-44f1-983f-118498b37bab">
 </p>
 
-All decrypted attachments will be saved at "C:/Users/%username%/Downloads/DatabasExtractor/Signal/org.thoguthcrime.securesms/app_parts/decrypted".
+All decrypted attachments will be saved at C:/Users/%username%/Downloads/DatabasExtractor/Signal/org.thoughtcrime.securesms/app_parts/decrypted.
 
 ## Prerequisites:
 - Your Android device must be rooted to use the DatabasExtractor script;
