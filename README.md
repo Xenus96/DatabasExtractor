@@ -11,6 +11,7 @@ Was tested primarly on Android 14.
 - Allows to delete the directory /storage/emulated/0/Download/DatabasExtractor to free the Mobile Device's space;
 - Automatically performs the AES GCM decryption of the SQLCipher key which is used to open the file "signal.db".
 ![An example of using the AES GCM decryption functionality](https://github.com/user-attachments/assets/f3a2cb82-ae7f-4c2b-91df-ee9f23b29412)
+- Automatically decrypts all user attachments (photo, video, documents) from the "../app_parts" directory of the Signal Messenger (for detailed examples see "Signal Attachment Decryption instractions")
 
 
 ## Prerequisites:
