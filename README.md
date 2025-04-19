@@ -1,4 +1,4 @@
-# DatabasExtractor
+# DatabasExtractor version 1.1
 Messenger DatabasExtractor for Android devices.\
 Was tested primarly on Android 14.
 
