@@ -46,5 +46,4 @@ All decrypted attachments will be saved at C:/Users/%username%/Downloads/Databas
 - You need to download an Android Debug Bridge (ADB) tool on your computer;
 - You need to install Python on your computer;
 - You need to connect your Android device to your computer via USB cable and turn on USB Debugging on the phone;
-- You need to start the DatabasExtractor.py script from the ADB directory (where the file abd.exe is located). This is applicable ONLY to DatabasExtractorv1.0. In DatabasExtractorv1.1 this process was automated.
 - The following Python libraries must be installed: cryptography, ...
