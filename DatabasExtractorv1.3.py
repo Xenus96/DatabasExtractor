@@ -626,7 +626,6 @@ def generate_user_html_report(json_dir: str, output_path: str):
 
 # A function which generates Chat History HTML reports for each user's chat (private and group)
 def generate_chat_history_report(json_dir: str, output_base_dir: str):
-
     os.makedirs(output_base_dir, exist_ok=True)
 
     def load_json(file_name):
@@ -647,17 +646,22 @@ def generate_chat_history_report(json_dir: str, output_base_dir: str):
         url_pattern = re.compile(r'(https?://[^\s<>"]+)')
         return url_pattern.sub(r'<a href="\1" target="_blank">\1</a>', text)
 
-    # The list of files from which the data must be extracted
     messages = load_json("message.json")
     recipients = load_json("recipient.json")
     attachments = load_json("attachment.json")
     key_values = load_json("key_value.json")
     groups = load_json("groups.json")
+    threads = load_json("thread.json")
 
     owner_id = next((item.get("value") for item in key_values if item.get("key") == "account.e164"), None)
     if not owner_id:
         print("\033[31m[✕] Could not determine the owner's Signal ID (account.e164).\033[0m")
         return
+
+    meaningful_threads = {t["_id"] for t in threads if t.get("meaningful_messages") == 1}
+
+    # Only keep messages from meaningful threads
+    messages = [m for m in messages if m.get("thread_id") in meaningful_threads]
 
     recipient_lookup = {}
     phone_lookup = {}
@@ -692,36 +696,28 @@ def generate_chat_history_report(json_dir: str, output_base_dir: str):
 
     attachment_base_path = os.path.expanduser(r"~\\Downloads\\DatabasExtractor\\Signal\\org.thoughtcrime.securesms\\app_parts\\decrypted")
 
-    conversations = {}
-    seen_group_keys = set()
+    # Group messages by thread_id
+    thread_messages = {}
     for msg in messages:
-        from_id = msg.get("from_recipient_id")
-        to_id = msg.get("to_recipient_id")
+        thread_id = msg.get("thread_id")
+        if thread_id:
+            thread_messages.setdefault(thread_id, []).append(msg)
+
+    for thread_id, msgs in thread_messages.items():
+        # Use first message to determine recipient
+        first_msg = msgs[0]
+        from_id = first_msg.get("from_recipient_id")
+        to_id = first_msg.get("to_recipient_id")
         from_phone = phone_lookup.get(from_id)
         to_phone = phone_lookup.get(to_id)
-        msg_type = msg.get("type")
+        partner_id = to_id if from_phone == owner_id else from_id
 
-        if to_id in recipient_group_map or (msg_type in [2, 12] and to_id in recipient_group_map):
-            group_id = recipient_group_map.get(to_id)
-            chat_key = f"group::{group_id}"
-            if chat_key not in seen_group_keys:
-                display_name = group_title_lookup.get(group_id, f"Group_{group_id}")
-                conversations[chat_key] = {"name": display_name, "messages": []}
-                seen_group_keys.add(chat_key)
-            conversations[chat_key]["messages"].append(msg)
-        elif owner_id in (from_phone, to_phone):
-            partner_id = to_id if from_phone == owner_id else from_id
-            if partner_id in group_recipient_ids:
-                continue
-            chat_key = f"user::{partner_id}"
-            display_name = recipient_lookup.get(partner_id, f"User_{partner_id}")
-            if chat_key not in conversations:
-                conversations[chat_key] = {"name": display_name, "messages": []}
-            conversations[chat_key]["messages"].append(msg)
+        if partner_id in group_recipient_ids:
+            group_id = recipient_group_map.get(partner_id)
+            person = group_title_lookup.get(group_id, f"Group_{group_id}")
+        else:
+            person = recipient_lookup.get(partner_id, f"User_{partner_id}")
 
-    for chat_key, data in conversations.items():
-        person = data["name"]
-        msgs = data["messages"]
         safe_name = re.sub(r'[^\w\-]', '_', person)
         output_path = os.path.join(output_base_dir, f"chat_with_{safe_name}.html")
 
@@ -765,7 +761,7 @@ def generate_chat_history_report(json_dir: str, output_base_dir: str):
                 to_name = recipient_lookup.get(to_id, f"User {to_id}")
                 html.append(f"<div>{from_name} added {to_name} to the group</div>")
             elif msg_type == 12:
-                html.append("<div>Started a video or an audio call</div>")
+                html.append("<div><i>[Started a video or an audio call]</i></div>")
             elif body:
                 html.append(f"<div>{format_body_with_links(body)}</div>")
             else:
