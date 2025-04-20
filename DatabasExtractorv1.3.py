@@ -67,14 +67,18 @@ def copy_files_from_device(remote_paths, local_dir, folder_name):
     run_adb_command(f"adb shell mkdir -p {messenger_folder}")
 
     # Copying files in a cycle
-    for remote_path in remote_paths:
+        for remote_path in remote_paths:
         file_name = os.path.basename(remote_path)
         destination_path = f"{messenger_folder}/{file_name}"
 
         # Use 'cp' command to copy files on the device
         copy_command = f"adb shell su -c 'cp -r {remote_path} {destination_path}'"
-        run_adb_command(copy_command)
-        print(f"[✓] Copied {remote_path} to {destination_path}")
+        result = run_adb_command(copy_command)
+        # If the file which is being copied throws an error, then skip it
+        if result is None:
+            print(f"\033[33m[✕] Skipped {remote_path} due to copy error.\033[0m")
+            continue
+        print(f"\033[32m[✓] Copied\033[0m {remote_path} \033[32mto\033[0m {destination_path}")
 
     # Pulling the directory 'DatabasExtractor' from Mobile Device to the local computer into the C:/Users/%username%/Downloads
     print(f"\033[34m[+] Pulling for files from\033[0m {messenger_folder} \033[34mto the local computer...\033[0m")
@@ -90,9 +94,29 @@ def copy_files_from_device(remote_paths, local_dir, folder_name):
             print(f"\033[31m[✕] An error occurred:\033[0m {e}")
 
     # Pulling for files from the Mobile Device
-    run_adb_command(
-            f"adb pull {messenger_folder} {windows_folder_path}")
-    print(f"\033[32m[✓] Files pulled successfully!\033[0m")
+    print(
+        f"\033[34m[+] Pulling individual files from\033[0m {messenger_folder} \033[34mto\033[0m {windows_folder_path}...")
+
+    # List files in the device folder
+    file_list_output = run_adb_command(f'adb shell su -c "find {messenger_folder} -type f"')
+    if not file_list_output:
+        print(f"\033[31m[✕] Failed to list files in {messenger_folder}.\033[0m")
+        return
+
+    device_files = file_list_output.strip().split('\n')
+    for device_file in device_files:
+        relative_path = device_file.replace(messenger_folder + '/', '')
+        local_file_path = os.path.join(windows_folder_path, folder_name, relative_path.replace('/', os.sep))
+
+        # Ensure the local directory exists
+        os.makedirs(os.path.dirname(local_file_path), exist_ok=True)
+
+        # Pull the file. If the file throws an error, then skip it
+        pull_result = run_adb_command(f'adb pull "{device_file}" "{local_file_path}"')
+        if pull_result is None:
+            print(f"\033[33m[!] Skipped file due to pull error:\033[0m {device_file}")
+        else:
+            print(f"\033[32m[✓] Pulled:\033[0m {relative_path}")
 
     # Renaming extracted Viber files so they have the correct database form. If the files are already exist and renamed, then skip this process
     if folder_name == "Viber":
