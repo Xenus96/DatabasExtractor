@@ -484,7 +484,7 @@ def generate_signal_user_html_report(json_dir: str, output_path: str):
         html.append(f"<tr><td>{s.get('_id','')}</td><td>{s.get('account_id','')}</td><td>{s.get('address','')}</td><td>{s.get('device','')}</td><td>{s.get('record','')}</td></tr>")
     html.append("</table>")
 
-    # Define what fields we want from the contact list
+    # Define which fields we want to use to form the contact list
     contact_fields = [
         ("ID", "_id"),
         ("Registered", "registered"),
