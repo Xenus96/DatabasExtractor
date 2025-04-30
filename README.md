@@ -21,7 +21,7 @@ Messenger DatabasExtractor for Android devices. Was tested primarly on Android 1
 - Automatically generates HTML reports with general info about the user and with his messaging history from the Viber Messenger.
 
 <p align="center">
-  <img width="800" src="https://github.com/user-attachments/assets/cd6e77db-1d9d-468c-a547-0d5b6573c0f3">
+  <img width="800" src="https://github.com/user-attachments/assets/d9efd946-0df8-41f6-bfaf-7bf0e4f42db4">
 </p>
 
 ## How to use the "Signal Artefact Extraction" feature
