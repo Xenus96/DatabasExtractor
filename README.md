@@ -17,8 +17,8 @@ Messenger DatabasExtractor for Android devices. Was tested primarly on Android 1
 </p>
 
 - Automatically decrypts all user attachments (photo, video, documents) from the "../app_parts" directory of the Signal Messenger (for detailed examples check the **"How to use the "Signal Artefact Extraction" feature"** paragraph below);
-- Automatically generates HTML reports with the general info about the user and with his messaging history inside the Signal Messenger (for detailed examples check the **"How to use the "Signal Artefact Extraction" feature"** paragraph below);
-- Automatically generates HTML reports with the general info about the user and with his messaging history inside the Viber Messenger.
+- Automatically generates HTML reports with general info about the user and with his messaging history inside the Signal Messenger (for detailed examples check the **"How to use the "Signal Artefact Extraction" feature"** paragraph below);
+- Automatically generates HTML reports with general info about the user and with his messaging history inside the Viber Messenger.
 
 <p align="center">
   <img width="800" src="https://github.com/user-attachments/assets/cd6e77db-1d9d-468c-a547-0d5b6573c0f3">
