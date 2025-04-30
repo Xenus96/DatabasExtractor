@@ -179,7 +179,7 @@ Plaintext Header Size: 0
             persistent_database_file_path = os.path.expanduser("~\Downloads\DatabasExtractor\Signal\persistent.sqlite")
             hex_key = extract_specific_blob_segment(persistent_database_file_path)
 
-            # Try to decrypt the SQLCipher key with the given HEX key. If fails then asks the user to input another HEX key.
+            # Try to decrypt the SQLCipher key with the given HEX key and extracted AES GCM parameters
             try:
                 decrypted = aes_gcm_decrypt(data, iv, hex_key)
                 print("\033[32m[✓] Decryption successful!\033[0m")
