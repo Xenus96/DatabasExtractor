@@ -1647,7 +1647,7 @@ def generate_viber_chat_history_report(viber_dir):
 
 
 
-# Functions that do the process of extracting the artefacts of the messengers and transforming them into the .html files
+# Functions that do the process of extracting artefacts from the Viber Messenger and transforming them into the HTML reports
 def extract_viber_artefacts():
     print("\n[+] Starting Viber artifact extraction and report generation...")
 
