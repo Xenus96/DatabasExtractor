@@ -1,4 +1,4 @@
-# DatabasExtractor version 1.3
+# DatabasExtractor version 1.4
 Messenger DatabasExtractor for Android devices. Was tested primarly on Android 14.
 
 <p align="center">
@@ -10,14 +10,19 @@ Messenger DatabasExtractor for Android devices. Was tested primarly on Android 1
 - Extracted artifacts are automatically copied to your local computer at C:\Users\<username>\Downloads\DatabasExtractor;
 - Extracted artifacts are also saved to an internal /storage/emulated/0/Download/DatabasExtractor directory of your Mobile Device;
 - Allows to delete the directory /storage/emulated/0/Download/DatabasExtractor to free the Mobile Device's space;
-- Automatically performs the AES GCM decryption of the SQLCipher key which is used to open the file "signal.db".
+- Automatically performs the AES GCM decryption of the SQLCipher key which is used to open the file "signal.db";
 
 <p align="center">
   <img width="800" src="https://github.com/user-attachments/assets/f3a2cb82-ae7f-4c2b-91df-ee9f23b29412">
 </p>
 
-- Automatically decrypts all user attachments (photo, video, documents) from the "../app_parts" directory of the Signal Messenger (for detailed examples check the **"How to use the "Signal Artefact Extraction" feature"** paragraph below)
-- Automatically generates HTML reports with the general info about the user and with his messaging history in the Signal Messenger (for detailed examples check the **"How to use the "Signal Artefact Extraction" feature"** paragraph below)
+- Automatically decrypts all user attachments (photo, video, documents) from the "../app_parts" directory of the Signal Messenger (for detailed examples check the **"How to use the "Signal Artefact Extraction" feature"** paragraph below);
+- Automatically generates HTML reports with the general info about the user and with his messaging history inside the Signal Messenger (for detailed examples check the **"How to use the "Signal Artefact Extraction" feature"** paragraph below);
+- Automatically generates HTML reports with the general info about the user and with his messaging history inside the Viber Messenger.
+
+<p align="center">
+  <img width="800" src="https://github.com/user-attachments/assets/cd6e77db-1d9d-468c-a547-0d5b6573c0f3">
+</p>
 
 ## How to use the "Signal Artefact Extraction" feature
 #### Step 1: Launch the DatabasExtractor tool and choose the specific option from the menu.
