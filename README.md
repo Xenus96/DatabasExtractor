@@ -1,4 +1,4 @@
-# DatabasExtractor version 1.4
+# DatabasExtractor version 1.5
 Messenger DatabasExtractor for Android devices. Was tested primarly on Android 14.
 
 <p align="center">
@@ -22,6 +22,12 @@ Messenger DatabasExtractor for Android devices. Was tested primarly on Android 1
 
 <p align="center">
   <img width="800" src="https://github.com/user-attachments/assets/d9efd946-0df8-41f6-bfaf-7bf0e4f42db4">
+</p>
+
+- Automatically generates HTML reports with general info about the user and with his messaging history from the WhatsApp Messenger.
+
+<p align="center">
+  <img width="800" src="https://github.com/user-attachments/assets/82103851-ea0a-438b-adf3-10c71331ea83">
 </p>
 
 ## How to use the "Signal Artefact Extraction" feature
@@ -57,10 +63,11 @@ The generated chat history HTML reports will be saved at: **<path_to_the_folder_
 
 
 ## Prerequisites:
-- Your Android device must be rooted to use the DatabasExtractor script;
+- Your mobile device must work under the Android OS 12-14;
+- Your mobile device must be rooted to use the DatabasExtractor tool;
 - You need to download an Android Debug Bridge (ADB) tool on your computer;
-- You need to install Python on your computer;
-- You need to connect your Android device to your computer with USB cable and turn on USB Debugging on the phone;
+- You need to install Python 3.10 (or newer) on your computer;
+- You need to connect your mobile device to your computer with USB cable and turn on USB Debugging on the phone;
 - The following Python libraries must be manually installed: cryptography.
 
 ## License
