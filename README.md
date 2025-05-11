@@ -57,13 +57,14 @@ The generated chat history HTML reports will be saved at: **<path_to_the_folder_
 
 
 ## Prerequisites:
-- Your Android device must be rooted to use the DatabasExtractor script;
+- Your mobile device must work under the Android OS 12-14;
+- Your mobile device must be rooted to use the DatabasExtractor tool;
 - You need to download an Android Debug Bridge (ADB) tool on your computer;
-- You need to install Python on your computer;
-- You need to connect your Android device to your computer with USB cable and turn on USB Debugging on the phone;
+- You need to install Python 3.10 (or newer) on your computer;
+- You need to connect your mobile device to your computer with USB cable and turn on USB Debugging on the phone;
 - The following Python libraries must be manually installed: cryptography.
 
 ## License
 
 [![License: CC BY-NC-ND 4.0](https://licensebuttons.net/l/by-nc-nd/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-nd/4.0/)
-This project is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](http://creativecommons.org/licenses/by-nc-nd/4.0/).
+This project is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](http://creativecommons.org/licenses/by-nc-nd/4.0/).s/by-nc-nd/4.0/).
