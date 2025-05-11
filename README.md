@@ -42,8 +42,14 @@ Messenger DatabasExtractor for Android devices. Was tested primarly on Android 1
 All decrypted attachments will be saved at C:/Users/%username%/Downloads/DatabasExtractor/Signal/org.thoughtcrime.securesms/app_parts/decrypted.
 
 ## Prerequisites:
-- Your Android device must be rooted to use the DatabasExtractor script;
+- Your mobile device must work under the Android OS 12-14;
+- Your mobile device must be rooted to use the DatabasExtractor tool;
 - You need to download an Android Debug Bridge (ADB) tool on your computer;
-- You need to install Python on your computer;
-- You need to connect your Android device to your computer via USB cable and turn on USB Debugging on the phone;
-- The following Python libraries must be installed: cryptography, ...
+- You need to install Python 3.10 (or newer) on your computer;
+- You need to connect your mobile device to your computer with USB cable and turn on USB Debugging on the phone;
+- The following Python libraries must be manually installed: cryptography.
+
+## License
+
+[![License: CC BY-NC-ND 4.0](https://licensebuttons.net/l/by-nc-nd/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-nd/4.0/)
+This project is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](http://creativecommons.org/licenses/by-nc-nd/4.0/).
