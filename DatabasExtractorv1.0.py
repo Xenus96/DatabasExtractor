@@ -3,6 +3,34 @@ import os
 import time
 from pathlib import Path
 
+# Logo
+logo = """
+  _____          _          _                  ______        _                      _               
+ |  __ \        | |        | |                |  ____|      | |                    | |              
+ | |  | |  __ _ | |_  __ _ | |__    __ _  ___ | |__   __  __| |_  _ __  __ _   ___ | |_  ___   _ __ 
+ | |  | | / _` || __|/ _` || '_ \  / _` |/ __||  __|  \ \/ /| __|| '__|/ _` | / __|| __|/ _ \ | '__|
+ | |__| || (_| || |_| (_| || |_) || (_| |\__ \| |____  >  < | |_ | |  | (_| || (__ | |_| (_) || |   
+ |_____/  \__,_| \__|\__,_||_.__/  \__,_||___/|______|/_/\_\ \__||_|   \__,_| \___| \__|\___/ |_|    
+                                                                                    
+"""
+
+# Script Information
+script_name = "DatabasExtractor"
+author = "Xenus96"
+github_url = "https://github.com/Xenus96/DatabasExtractor/tree/main"
+license_type = "Attribution-NonCommercial-NoDerivatives 4.0 International"
+version = "1.5"  #
+
+# Display the information
+print("======================================================================================================")
+print(logo)
+print("======================================================================================================")
+print(f"\nAuthor: {author}")
+print(f"Script Name: {script_name} version {version}")
+print(f"GitHub Repository: {github_url}")
+print(f"License: {license_type}")
+print("\nFor detailed documentation, visit the GitHub repository.\n")
+
 
 # Function to execute ADB commands
 def run_adb_command(command):
