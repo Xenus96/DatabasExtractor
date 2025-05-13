@@ -1,4 +1,4 @@
-# DatabasExtractor version 1.5
+# DatabasExtractor version 1.6
 Messenger DatabasExtractor for Android devices. Was tested primarly on Android 14.
 
 <p align="center">
@@ -29,6 +29,13 @@ Messenger DatabasExtractor for Android devices. Was tested primarly on Android 1
 <p align="center">
   <img width="800" src="https://github.com/user-attachments/assets/82103851-ea0a-438b-adf3-10c71331ea83">
 </p>
+
+- Automatically generates HTML reports with general info about the user and with his messaging history from the cache of the Telegram Messenger.
+
+<p align="center">
+  <img width="800" src="https://github.com/user-attachments/assets/7295acf9-967d-4a0b-a7a1-6b1ae2025ee2">
+</p>
+
 
 ## How to use the "Signal Artefact Extraction" feature
 #### Step 1: Launch the DatabasExtractor tool and choose the specific option from the menu.
