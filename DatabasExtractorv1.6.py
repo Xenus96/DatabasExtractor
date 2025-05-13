@@ -33,7 +33,7 @@ script_name = "DatabasExtractor"
 author = "Xenus96"
 github_url = "https://github.com/Xenus96/DatabasExtractor/tree/main"
 license_type = "Attribution-NonCommercial-NoDerivatives 4.0 International"
-version = "1.5"  #
+version = "1.6"  #
 
 # Display the information
 print("======================================================================================================")
