@@ -46,7 +46,7 @@ Messenger DatabasExtractor for Android devices. Was tested primarly on Android 1
 
 **IMPORTANT NOTE:** Before decrypting attachments and generating the HTML reports, you need to extract the Signal Messenger files from you Mobile Device with DatabasExtractor!
 
-#### Step 2: Open the decrypted "signal.db" database in DB Browser for SQLite and export the table "attachment.json" to a new folder.
+#### Step 2: Open the decrypted "signal.db" database in DB Browser for SQLite and export all the tables to a new folder.
 
 <p align="center">
   <img width="800" src="https://github.com/user-attachments/assets/15da87f3-7fe0-4826-b202-2a9e45de9ec8">
